@@ -5,6 +5,7 @@ import java.util.Map;
 import com.tensquare.qa.client.BaseClient;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @CrossOrigin
+@RefreshScope
 @RequestMapping("/problem")
 public class ProblemController {
 

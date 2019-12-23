@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,8 @@ import entity.Result;
 import entity.StatusCode;
 import util.JwtUtil;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * user控制器层
  * @author Administrator
@@ -23,6 +26,7 @@ import util.JwtUtil;
  */
 @RestController
 @CrossOrigin
+@RefreshScope
 @RequestMapping("/user")
 public class UserController {
 
@@ -34,6 +38,9 @@ public class UserController {
 
 	@Autowired
 	private JwtUtil jwtUtil;
+
+	@Autowired
+	private HttpServletRequest request;
 
 	/**
 	 * 更新粉丝数和关注数
@@ -53,6 +60,7 @@ public class UserController {
 	        return new Result(false,StatusCode.LOGINERROR,"用户名或密码错误");
         }
 		String token = jwtUtil.createJWT(userBySql.getId(), userBySql.getMobile(), "user");
+	    request.setAttribute("Authorization","Bearer "+token);
 	    Map<String,Object> map=new HashMap<>();
 	    map.put("token",token);
 	    map.put("roles","user");

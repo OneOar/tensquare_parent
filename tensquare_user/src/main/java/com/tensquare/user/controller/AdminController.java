@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ import util.JwtUtil;
  */
 @RestController
 @CrossOrigin
+@RefreshScope
 @RequestMapping("/admin")
 public class AdminController {
 
